@@ -37,9 +37,6 @@ public class Article extends BaseEntity {
     @Getter @Setter
     private Category category;
 
-    @ManyToMany
-    private final Set<StockMovement> movements = new HashSet<>();
-
     public Article(UUID id, String designation, long unitPriceExcludingTax, String picture, VAT vat, Category category) {
         super(id);
         this.designation = designation;
@@ -58,17 +55,5 @@ public class Article extends BaseEntity {
         BigDecimal priceTTE = BigDecimal.valueOf(this.unitPriceExcludingTax);
         BigDecimal addedValue = priceTTE.multiply(vat);
         return addedValue.setScale(0, RoundingMode.HALF_UP).longValue();
-    }
-
-    public Set<StockMovement> getMovements() {
-        return Set.copyOf(movements);
-    }
-
-    public void addMovement(StockMovement movement) {
-        movements.add(movement);
-    }
-
-    public void removeMovement(StockMovement movement) {
-        movements.remove(movement);
     }
 }

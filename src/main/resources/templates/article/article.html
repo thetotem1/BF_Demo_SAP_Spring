@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Article Solo</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+<th:block th:insert="layout/header"></th:block>
+<main>
+    <h2> Article Solo</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Designation</th>
+            <th>Picture</th>
+            <th>Price TTE</th>
+            <th>Price TTC</th>
+            <th>VAT</th>
+            <th>VAT Value</th>
+            <th>Category</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="details: ${article}">
+            <td th:text="*{details.id()}"></td>
+            <td th:text="*{details.designation()}"></td>
+            <td th:text="*{details.picture()}"></td>
+            <td th:text="*{details.unitPriceExcludingTax() + '$'}"></td>
+            <td th:text="*{details.unitPriceIncludingTax() + '$'}"></td>
+            <td th:text="*{details.vat()}"></td>
+            <td th:text="*{details.vatValue()}"></td>
+            <td th:text="*{details.category()}"></td>
+
+        </tbody>
+    </table>
+</main>
+<th:block th:insert="~{layout/footer}"></th:block>
+
+</body>
+</html>

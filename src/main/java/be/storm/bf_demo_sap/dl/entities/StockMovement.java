@@ -1,10 +1,7 @@
 package be.storm.bf_demo_sap.dl.entities;
 
 import be.storm.bf_demo_sap.dl.enums.StockMovemenType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 
@@ -28,10 +25,14 @@ public class StockMovement extends BaseEntity {
     @Column(nullable = false)
     private LocalDateTime movementDate;
 
-    public StockMovement(UUID id, StockMovemenType stockMovemenType, int quantity, LocalDateTime movementDate) {
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Article article;
+
+    public StockMovement(UUID id, StockMovemenType stockMovemenType, int quantity, LocalDateTime movementDate, Article article) {
         super(id);
         this.stockMovemenType = stockMovemenType;
         this.quantity = quantity;
         this.movementDate = movementDate;
+        this.article = article;
     }
 }
